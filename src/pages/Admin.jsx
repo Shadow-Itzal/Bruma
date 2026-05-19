@@ -1,9 +1,18 @@
-// src/pages/Admin.jsx
+
+// =====================
+// IMPORTACIONES
+// =====================
+
 import React, { useState } from "react";
 import styles from "./Admin.module.css"; 
 
 function Admin() {
+
+    // =========================
+    // ESTADOS Y CONFIGURACION
+    // =========================
     
+    // molde base para limpiar el formulario
     const estadoInicialFormulario = {
         nombre: '',
         precio: '',
@@ -19,20 +28,30 @@ function Admin() {
     };
 
     const [datosFormulario, setDatosFormulario] = useState(estadoInicialFormulario);
-    const [mostrarExito, setMostrarExito] = useState(false);
-    
-    // ESTADO NUEVO: Para forzar el reseteo visual de los inputs de tipo file
-    const [llaveReset, setLlaveReset] = useState(0);
+    const [mostrarExito, setMostrarExito] = useState(false); // booleano sobre mensaje de exito
+    const [loading, setLoading] = useState(false); // Estado de carga (Loading), evita que el usuario envíe el formulario dos
+    const [llaveReset, setLlaveReset] = useState(0); // Llave de reseteo para forzar a React a destruir y recrear los inputs de tipo file
 
+    // Leer la API Key de forma segura desde las variables de entorno de Vite (.env)
+    const API_KEY_IMGBB = import.meta.env.VITE_IMGBB_API_KEY;
+
+
+    // =========================
+    // MANEJADORES DE EVENTOS
+    // =========================
+
+    // Función unificada para capturar los cambios en tiempo real del formulario (Evento onChange)
     const manejarCambio = (evento) => {
         const { name, value, type, files } = evento.target;
         
+        // Evaluamos si el input es de tipo archivo (file)
         if (type === "file") {
             setDatosFormulario({
                 ...datosFormulario,
                 [name]: files[0] 
             });
         } else {
+            // Si es un input de texto, número o textarea común
             setDatosFormulario({
                 ...datosFormulario,
                 [name]: value
@@ -40,23 +59,78 @@ function Admin() {
         }
     };  
 
-    const manejarEnvio = (evento) => {
-        evento.preventDefault(); 
+    // Función auxiliar asíncrona para subir una imagen individual a ImgBB
+    const subirImagenAImgBB = async (archivo) => {
+        if (!archivo) return null; // Si por alguna razón el campo opcional u obligatorio no posee un archivo, frena la ejecución
 
-        console.log('Obra capturada para Bruma:', datosFormulario);
+        const formData = new FormData();
+        formData.append("image", archivo);
 
-        // 1. Limpiamos los datos del estado
-        setDatosFormulario(estadoInicialFormulario);
+        try {
+            // Petición POST a la API de ImgBB usando la API Key por parámetro de URL
+            const respuesta = await fetch(`https://api.imgbb.com/1/upload?key=${API_KEY_IMGBB}`, {
+                method: "POST",
+                body: formData
+            });
 
-        // 2. Cambiamos la llave para obligar a los inputs de archivo a vaciarse
-        setLlaveReset(prev => prev + 1);
+            if (!respuesta.ok) {
+                throw new Error("Error al subir la imagen a ImgBB");
+            }
 
-        // 3. Mostramos el cartel de éxito
-        setMostrarExito(true);
-        setTimeout(() => {
-            setMostrarExito(false);
-        }, 4000);
+            const resultadoJson = await respuesta.json();
+            // Retornamos la URL limpia y directa que nos provee el servicio externo
+            return resultadoJson.data.url;
+        } catch (error) {
+            console.error("Error en la carga de archivos:", error);
+            throw error;
+        }
     };
+
+
+    // manejador del envio definitivo del formulario
+    const manejarEnvio = async (evento) => {
+        evento.preventDefault(); 
+        setLoading(true); // Activamos estado de carga para congelar el botón y dar feedback
+
+        try {
+            // 1. Subimos ambas imágenes en paralelo o secuencial a ImgBB
+            console.log("Subiendo imágenes a la nube de ImgBB...");
+            const urlEscenario = await subirImagenAImgBB(datosFormulario.imagen_escenario);
+            const urlProducto = await subirImagenAImgBB(datosFormulario.imagen_producto);
+
+            // 2. Construimos el objeto final con las URLs reales listas para tu productos.json ficticio o estado global
+            const nuevaObraDeArte = {
+                ...datosFormulario,
+                precio: Number(datosFormulario.precio),
+                stock: Number(datosFormulario.stock),
+                imagen_escenario: urlEscenario, // Ahora es un string http://...
+                imagen_producto: urlProducto    // Ahora es un string http://...
+            };
+
+            // Replicamos el console.log original mostrando el éxito sofisticado
+            console.log('Obra capturada con URLs reales para Bruma:', nuevaObraDeArte);
+
+            // 3. Limpiamos los datos del estado e inputs
+            setDatosFormulario(estadoInicialFormulario); // Blanqueamos los estados de texto y número
+            setLlaveReset(prev => prev + 1); // Incrementamos la key para forzar el vaciado de los inputs file
+
+            // 4. Mostramos el cartel de éxito
+            setMostrarExito(true);
+            setTimeout(() => {
+                setMostrarExito(false);
+            }, 4000);
+
+        } catch (error) {
+            alert("Hubo un problema al guardar la obra. Por favor, intenta de nuevo.");
+        } finally {
+            setLoading(false); // Apagamos el cargador pase lo que pase
+        }
+    };
+
+
+    // =============================
+    // RENDERIZADO DEL COMPONENTE
+    // =============================
 
     return (
         <div className={styles.contenedorAdmin}>
@@ -78,6 +152,8 @@ function Admin() {
                         name="nombre" 
                         value={datosFormulario.nombre} 
                         onChange={manejarCambio} 
+                        disabled={loading} // Se congela si está cargando
+                        placeholder="ej: Bruma Matinal"
                         required 
                     />
                 </div>
@@ -91,6 +167,8 @@ function Admin() {
                             name="precio" 
                             value={datosFormulario.precio} 
                             onChange={manejarCambio} 
+                            disabled={loading}
+                            placeholder="2500"
                             required 
                         />
                     </div>
@@ -101,6 +179,8 @@ function Admin() {
                             name="stock" 
                             value={datosFormulario.stock} 
                             onChange={manejarCambio} 
+                            disabled={loading}
+                            placeholder="4"
                             required 
                         />
                     </div>
@@ -115,6 +195,8 @@ function Admin() {
                             name="dimensiones" 
                             value={datosFormulario.dimensiones} 
                             onChange={manejarCambio} 
+                            disabled={loading}
+                            placeholder="ej: 110cm x 75cm"
                             required 
                         />
                     </div>
@@ -125,6 +207,8 @@ function Admin() {
                             name="categoria" 
                             value={datosFormulario.categoria} 
                             onChange={manejarCambio} 
+                            disabled={loading}
+                            placeholder="ej: Pintura Contemporánea"
                             required 
                         />
                     </div>
@@ -138,6 +222,8 @@ function Admin() {
                         name="tecnica" 
                         value={datosFormulario.tecnica} 
                         onChange={manejarCambio} 
+                        disabled={loading}
+                        placeholder="ej: Fotografia artistica"
                         required 
                     />
                 </div>
@@ -150,6 +236,8 @@ function Admin() {
                         name="materiales" 
                         value={datosFormulario.materiales} 
                         onChange={manejarCambio} 
+                        disabled={loading}
+                        placeholder="ej: Impresión Giclée sobre papel Fine Art..."
                         required 
                     />
                 </div>
@@ -161,7 +249,9 @@ function Admin() {
                         type="text" 
                         name="frase_inspiracional" 
                         value={datosFormulario.frase_inspiracional} 
+                        disabled={loading}
                         onChange={manejarCambio} 
+                        placeholder="ej: El silencio que antecede al color."
                     />
                 </div>
 
@@ -173,37 +263,41 @@ function Admin() {
                         rows="4"
                         value={datosFormulario.descripcion} 
                         onChange={manejarCambio} 
+                        disabled={loading}
+                        placeholder="Escribe aquí el análisis de la obra, trazos y contexto emocional..."
                         required 
                     ></textarea>
                 </div>
 
                 {/* Imágenes locales con KEY DINÁMICA */}
                 <div className={styles.grupoCampo}>
-                    <label>Imagen Escenario (Mockup en ambiente)</label>
+                    <label>Imagen Escenario {loading && "— Subiendo..."}</label>
                     <input 
                         key={`escenario-${llaveReset}`}
                         type="file" 
                         name="imagen_escenario" 
                         accept="image/*"
                         onChange={manejarCambio} 
+                        disabled={loading}
                         required 
                     />
                 </div>
 
                 <div className={styles.grupoCampo}>
-                    <label>Imagen Producto (Solo el lienzo/cuadro)</label>
+                    <label>Imagen Producto {loading && "— Subiendo..."}</label>
                     <input 
                         key={`producto-${llaveReset}`}
                         type="file" 
                         name="imagen_producto" 
                         accept="image/*"
                         onChange={manejarCambio} 
+                        disabled={loading}
                         required 
                     />
                 </div>
 
-                <button type="submit" className={styles.botonEnviar}>
-                    Subir a Galería
+                <button type="submit" className={styles.botonEnviar} disabled={loading}>
+                    {loading ? "Procesando Obra..." : "Subir a Galería"}
                 </button>
 
                 {mostrarExito && (

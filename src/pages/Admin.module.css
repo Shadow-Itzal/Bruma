@@ -1,10 +1,8 @@
-/* src/pages/Admin.module.css */
-
 .contenedorAdmin {
     max-width: 800px;
     margin: 60px auto;
     padding: 0 20px;
-    background-color: #F7F7F7; /* Fondo Claro */
+    background-color: var(--fondo-claro); 
     font-family: 'Playfair Display', serif;
 }
 
@@ -14,7 +12,7 @@
 }
 
 .fraseInspiracional {
-    color: #141430; /* Azul Medianoche */
+    color: var(--azul-medianoche); 
     font-size: 2rem;
     font-weight: 400;
     font-style: italic;
@@ -22,7 +20,7 @@
 }
 
 .subtituloAdmin {
-    color: #99AC8B; /* Verde Salvia */
+    color: var(--verde-salvia); 
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 0.85rem;
@@ -51,17 +49,19 @@
 }
 
 .grupoCampo label {
-    color: #141430;
-    font-size: 0.9rem;
-    font-weight: bold;
+    color: var(--azul-medianoche);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .grupoCampo input,
 .grupoCampo textarea {
     padding: 12px;
     border: 1px solid rgba(20, 20, 48, 0.2);
-    background-color: #FFFFFF;
-    color: #141430;
+    background-color: var(--blanco-puro);
+    color: var(--azul-medianoche);
     font-size: 1rem;
     transition: border-color 0.3s ease;
 }
@@ -69,12 +69,12 @@
 .grupoCampo input:focus,
 .grupoCampo textarea:focus {
     outline: none;
-    border-color: #99AC8B; /* Encendido elegante en Verde Salvia */
+    border-color: var(--verde-salvia); /* Encendido elegante en Verde Salvia */
 }
 
 .botonEnviar {
-    background-color: #141430; /* Azul Medianoche */
-    color: #F7F7F7;
+    background-color: var(--azul-medianoche); 
+    color: var(--fondo-claro);
     padding: 15px;
     border: none;
     font-size: 1rem;
@@ -85,12 +85,12 @@
 }
 
 .botonEnviar:hover {
-    background-color: #99AC8B; /* Cambio armonioso al pasar el mouse */
+    background-color: var(--verde-salvia); /* Cambio armonioso al pasar el mouse */
 }
 
 .mensajeExito {
     text-align: center;
-    color: #99AC8B;
+    color: var(--verde-salvia);
     font-size: 1.1rem;
     font-style: italic;
     margin-top: 15px;
@@ -101,3 +101,27 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Feedback visual minimalista para el estado de carga */
+.botonEnviar:disabled {
+    background-color: var(--verde-salvia);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.formularioCarga input:disabled,
+.formularioCarga textarea:disabled {
+    background-color: rgba(20, 20, 48, 0.03);
+    border-color: rgba(20, 20, 48, 0.1);
+    cursor: not-allowed;
+}
+
+/* Estilo minimalista y opacidad sutil para los placeholders */
+.grupoCampo input::placeholder,
+.grupoCampo textarea::placeholder {
+    color: var(--azul-medianoche);
+    opacity: 0.35; /* El texto muestra queda muy suave de fondo */
+    font-size: 0.9rem;
+    font-style: italic; /* Aporta sofisticación artística */
+}
+

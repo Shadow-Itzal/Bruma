@@ -29,7 +29,7 @@ function Carrito() {
     }
 
     const manejarFinalizar = () => {
-        alert("¡Muchas gracias por tu compra en Bruma! Pronto nos pondremos en contanto para coordinar en envio de tus obras.");
+        alert("¡Muchas gracias por tu compra en Bruma! Pronto nos pondremos en contanto para coordinar el envio de tus obras.");
         vaciarCarrito(); // el carrito se vacia al finalizar compra
     };
 
