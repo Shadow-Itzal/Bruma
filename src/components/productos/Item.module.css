@@ -1,0 +1,105 @@
+.card {
+    background-color: var(--blanco-puro);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 20px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* sombra muy suave */
+}
+
+/* hover elegante en la tarjeta entera */
+.card:hover {
+    transform: translateY( -3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* imagen */
+.imagen {
+    width: 100%;
+    height: 280px;
+    /* solucion a zoom: 'contain' asegura que la imagen se vea dentro del espacio, sin contarse, aunque deje bordes si no coincide la proporcion. Otra opcion en 'cover' y object-position */
+    object-fit: cover;
+    object-position: center; /* asegura que el centro de la escena siempre sea visible */
+    background-color: #f9f9f9; /* un fondo para cuando no se cubre todo */
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* cambio ux: un zoom suave solo a la imagen al pasar por la tarjeta */
+.card:hover .imagen {
+    transform: scale(1.02);
+}
+
+/* nombre */
+.nombre {
+    font-size: 1.1rem;
+    color: var(--azul-medianoche);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* precio */
+.precio {
+    font-size: 1.1rem;
+    color: var(--verde-salvia);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* contenedor botones */
+.botones {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+/* estilos base de los botones (comunes) */
+.comprar, .detalles {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease; /* all para animar color y movimiento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* para el Link de detalles */
+    height: 45px; /* altura fija, para que sean iguales */
+}
+
+/* animacion: movimiento suave hacia arriba al pasar el puntero */
+.comprar:hover, .detalles:hover {
+    transform: translateY(-3px);
+}
+
+/* boton comprar */
+.comprar {
+    background-color: var(--azul-medianoche);
+    color: var(--blanco-puro);
+    border: none;
+}
+
+.comprar:hover {
+    background-color: var(--verde-salvia); /* cambio al color secundario oficial */
+}
+
+/* boton detalles */
+.detalles {
+    background-color: transparent;
+    border: 1px solid var(--azul-medianoche);
+    color: var(--azul-medianoche);
+}
+
+.detalles:hover {
+    /* efecto inverso o lleno */
+    background-color: var(--azul-medianoche);
+    color: var(--blanco-puro);
+}
+

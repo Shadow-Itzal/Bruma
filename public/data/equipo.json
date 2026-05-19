@@ -1,0 +1,25 @@
+{
+    "equipo_bruma": [
+        {
+            "id": 1,
+            "nombre": "Lucía Rossi",
+            "cargo": "Curadora de Arte y Jefa de Producción",
+            "frase": "Mi trabajo es asegurar que cada impresión que sale de nuestra galería no sea solo una imagen, sino una pieza con alma que transforme tu espacio.",
+            "foto_url": "images/equipo/Lucia_Rossi.png"
+        },
+        {
+            "id": 2,
+            "nombre": "Mateo Aranda",
+            "cargo": "Especialista en Impresión Fina y Color",
+            "frase": "Busco la perfección en cada gota de tinta y en cada textura de papel, porque sé que el arte se siente tanto con los ojos como con el tacto.",
+            "foto_url": "images/equipo/Mateo_Aranda.png"
+        },
+        {
+            "id": 3,
+            "nombre": "Julián Paz",
+            "cargo": "Director de Experiencia y Alianzas",
+            "frase": "Mi pasión es ayudarte a encontrar esa obra que hable de vos, logrando que el arte de Bruma sea el toque final que haga de tu casa un verdadero hogar.",
+            "foto_url": "images/equipo/Julian_Paz.png"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+# =======================================================================
+# BRUMA GALERÍA - CONFIGURACIÓN DE GITIGNORE (Clases 1 a 7)
+# =======================================================================
+
+# -----------------------------------------------------------------------
+# 1. LOGS (Registros de actividad y errores del sistema)
+# -----------------------------------------------------------------------
+# Ignora la carpeta general donde se guarden reportes de errores.
+logs
+# Ignora cualquier archivo que termine en .log (creados cuando algo falla).
+*.log
+# Registros de errores específicos de npm (el gestor de paquetes de Node).
+npm-debug.log*
+# Registros de errores si se usara Yarn como gestor alternativo.
+yarn-debug.log*
+yarn-error.log*
+# Registros de errores si se usara PNPM.
+pnpm-debug.log*
+# Registros de errores si se usara Lerna (herramienta para proyectos múltiples).
+lerna-debug.log*
+
+# -----------------------------------------------------------------------
+# 2. DIAGNOSTIC REPORTS (Reportes de rendimiento/diagnóstico de Vite/CRA)
+# -----------------------------------------------------------------------
+# Ignora archivos JSON con patrones numéricos generados automáticamente 
+# al auditar el rendimiento o fallos de compilación del empaquetador.
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# -----------------------------------------------------------------------
+# 3. DEPENDENCY DIRECTORIES (¡Las librerías externas descargadas!)
+# -----------------------------------------------------------------------
+# ¡EL MÁS CRÍTICO! Ignora la carpeta que contiene las miles de librerías de terceros.
+# No se sube porque pesa cientos de MBs y se regenera con 'npm install'.
+node_modules/
+# Ignora paquetes de JSPM (un gestor de módulos antiguo, por si acaso).
+jspm_packages/
+
+# -----------------------------------------------------------------------
+# 4. BUILD OUTPUTS (Archivos listos para producción)
+# -----------------------------------------------------------------------
+# Ignora la carpeta donde Vite compila, minifica y optimiza el código final.
+# Cambia en cada compilación (npm run build), por ende no se trackea en Git.
+dist/
+# Ignora la versión de producción optimizada para Server-Side Rendering (Renderizado en Servidor).
+dist-ssr/
+# Ignora archivos de configuración del entorno que sean puramente locales.
+*.local
+
+# -----------------------------------------------------------------------
+# 5. EDITOR DIRECTORIES AND FILES (Preferencias de tu editor de código)
+# -----------------------------------------------------------------------
+# Ignora las configuraciones privadas de tu Visual Studio Code (ej: tamaño de letra, pestañas).
+.vscode/*
+# ¡EXCEPCIÓN! El signo '!' significa NO ignorar. Permite subir la lista de extensiones 
+# recomendadas de VS Code para que otros desarrolladores del equipo las compartan.
+!.vscode/extensions.json
+# Ignora configuraciones automáticas si usaras WebStorm o editores de IntelliJ.
+.idea/
+# Archivo oculto exclusivo de computadoras Mac (guarda vistas de carpetas e iconos).
+.DS_Store
+# Archivos temporales de optimización si usaras Visual Studio tradicional (C#/.NET).
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+# Archivos temporales de intercambio creados por editores de terminal como Vim.
+*.sw?
+
+# -----------------------------------------------------------------------
+# 6. VARIABLES DE ENTORNO (¡CRÍTICO PARA LA SEGURIDAD DE BRUMA!)
+# -----------------------------------------------------------------------
+# Ignora el archivo principal donde vas a guardar tu API Key real de ImgBB.
+.env
+# Ignora variantes locales o de desarrollo para que tus credenciales secretas
+# NUNCA terminen públicas en tu perfil de GitHub.
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+

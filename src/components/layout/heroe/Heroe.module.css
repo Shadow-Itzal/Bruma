@@ -1,0 +1,14 @@
+.heroe {
+    width: 100%;
+    height: 80vh; /* Altura grande - tipo portada */
+
+    background-image: url('/images/marca/heroe.png'); 
+
+    background-size:cover; /* Hace que la imagen cubra todo */
+    background-position:center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Para que imagen no se repita */
+
+
+    background-attachment: fixed; /* da un efecto sutil de movimiento al hacer scroll */
+}
+

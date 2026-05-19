@@ -1,0 +1,15 @@
+.contenedorPadre {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el sitio ocupe toda la pantalla */
+}
+
+.contenidoPrincipal {
+    flex: 1; /* Esto empuja el footer hacia abajo si hay poco contenido */
+    /* Cambiamos el padding: 
+        0 arriba (para que el Heroe se pegue al Header)
+        0 a los lados (el Heroe suele ser ancho completo)
+        2rem abajo (para que no se pegue al Footer) */
+    padding: 0 0 2rem 0;
+}
+

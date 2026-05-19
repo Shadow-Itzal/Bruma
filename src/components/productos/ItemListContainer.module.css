@@ -1,0 +1,19 @@
+.seccion {
+    padding: 80px 8%;
+    background-color: var(--fondo-claro);
+}
+
+/* titulo */
+.titulo {
+    font-size: 2rem;
+    color: var(--azul-medianoche);
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}

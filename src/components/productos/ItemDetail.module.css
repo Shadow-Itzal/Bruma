@@ -1,0 +1,127 @@
+.detalleContainer {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    background-color: var(--blanco-puro);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+.colImagen {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagenDetalle {
+    width: 100%;
+    border-radius: 4px; /* Bordes más rectos para simular el cuadro */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+}
+
+/* La Frase Inspiracional */
+.frase {
+    font-family: 'Georgia', serif; /* Una fuente con serifa queda mejor para frases */
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--azul-medianoche);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 80%;
+    position: relative;
+    padding: 0 20px;
+}
+
+.frase::before, .frase::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background-color: var(--verde-salvia);
+    margin: 10px auto;
+}
+
+.colInfo {
+    flex: 1;
+}
+
+.categoria {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: var(--verde-salvia);
+    font-weight: 700;
+}
+
+.titulo {
+    font-size: 2.8rem;
+    color: var(--azul-medianoche);
+    margin: 10px 0;
+}
+
+.tecnica {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.precio {
+    font-size: 2rem;
+    color: var(--azul-medianoche);
+    font-weight: 300;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.bloqueInfo h4 {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.especificaciones {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.stock {
+    color: var(--azul-medianoche); /* Color por defecto */
+    transition: color 0.3s ease;
+}
+
+/* Esta clase se activa solo cuando el stock es bajo */
+.pocoStock {
+    color: #d32f2f; /* Un rojo elegante para la alerta */
+    font-weight: 600;
+}
+
+/* Opcional: si querés que el texto de "Stock disponible" también cambie */
+.pocoStock strong {
+    color: #d32f2f;
+}
+
+.botonCompra {
+    width: 100%;
+    padding: 18px;
+    background-color: var(--azul-medianoche);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.4s;
+}
+
+.botonCompra:hover {
+    background-color: var(--verde-salvia);
+}

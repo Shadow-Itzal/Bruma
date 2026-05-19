@@ -1,0 +1,22 @@
+.detalleMain {
+    padding: 20px 8%;
+    min-height: 80vh; /* Para que el footer no suba mucho si hay poco contenido */
+}
+
+.botonVolver {
+    /* background: none; */
+    background-color: var(--verde-salvia);
+    border: 1px solid var(--azul-medianoche);
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: var(--azul-medianoche);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.botonVolver:hover {
+    background-color: var(--azul-medianoche);
+    color: var(--blanco-puro);
+}

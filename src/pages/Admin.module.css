@@ -1,0 +1,103 @@
+/* src/pages/Admin.module.css */
+
+.contenedorAdmin {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    background-color: #F7F7F7; /* Fondo Claro */
+    font-family: 'Playfair Display', serif;
+}
+
+.cabeceraAdmin {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.fraseInspiracional {
+    color: #141430; /* Azul Medianoche */
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.subtituloAdmin {
+    color: #99AC8B; /* Verde Salvia */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+}
+
+.formularioCarga {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espacio negativo sutil entre campos */
+}
+
+.grupoCampo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* AQUÍ SE REALIZA LA MAGIA DE LA ALINEACIÓN PARALELA */
+.filaDoble {
+    display: flex;
+    gap: 20px; /* Separación entre los dos campos */
+}
+
+.filaDoble .grupoCampo {
+    flex: 1; /* Hace que ambos campos midan exactamente lo mismo (50% cada uno) */
+}
+
+.grupoCampo label {
+    color: #141430;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.grupoCampo input,
+.grupoCampo textarea {
+    padding: 12px;
+    border: 1px solid rgba(20, 20, 48, 0.2);
+    background-color: #FFFFFF;
+    color: #141430;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.grupoCampo input:focus,
+.grupoCampo textarea:focus {
+    outline: none;
+    border-color: #99AC8B; /* Encendido elegante en Verde Salvia */
+}
+
+.botonEnviar {
+    background-color: #141430; /* Azul Medianoche */
+    color: #F7F7F7;
+    padding: 15px;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.botonEnviar:hover {
+    background-color: #99AC8B; /* Cambio armonioso al pasar el mouse */
+}
+
+.mensajeExito {
+    text-align: center;
+    color: #99AC8B;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

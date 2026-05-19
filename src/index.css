@@ -1,0 +1,56 @@
+/*  ========================
+        VARIABLES GLOBALES 
+    ========================  */
+
+:root {
+    --azul-medianoche: #141430;
+    --verde-salvia: #99AC8B;
+    --fondo-claro: #f7f7f7;
+    --blanco-puro: #ffffff;
+}
+
+
+/*  ========================
+        ESTILOS GENERALES 
+    ========================  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*  ========================
+        BODY 
+    ======================== */
+
+body {
+    /* tipografia limpia y moderna */
+    font-family: Inter, sans-serif;
+
+    /* fondo principal */
+    background-color: var(--fondo-claro);
+
+    /* color base de texto */
+    color: var(--azul-medianoche);
+
+    /* El suavizado de fuente da ese toque "premium" */
+    -webkit-font-smoothing: antialiased;
+}
+
+/*  ========================
+        LINKS 
+    ======================== */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*  ========================
+        LISTAS 
+    ======================== */
+
+ul {
+    list-style: none;
+}
